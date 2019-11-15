@@ -24,3 +24,66 @@ a wall or another beeper pile.
 
 • Karel must finish execution facing east at the northeast corner of the world.
 */
+
+import "turns";
+
+function Solve(){
+	repeat(9){
+		mostGoes();
+	}
+	goUpRight();
+	go();
+	go();
+	goUpRight();
+	while(frontIsClear()){
+		move();
+	}
+}
+
+function mostGoes(){
+	goUpRight();
+	go();
+	return();
+}
+
+function go(){
+	find();
+	collect();
+	distribute();
+}
+
+function goUpRight(){
+	turnLeft();
+	move();
+	turnRight();
+}
+
+function find(){
+	while(noBeepersPresent()){
+		if(frontIsClear()){
+			move();
+		}
+	}
+}
+
+function collect(){
+	while(beepersPresent()){
+		pickBeeper();
+	}
+}
+		
+
+function distribute(){
+	while(beepersInBag()){
+		putBeeper();
+		move();
+	}
+}
+
+function return(){
+	turnAround();
+	while(frontIsClear()){
+		move();
+	}
+	turnAround();
+}
